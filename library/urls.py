@@ -14,4 +14,5 @@ urlpatterns = patterns('',
     url(r'^$',"mylib.views.search"),
     url(r'^show/(?P<id>\d+)$',"mylib.views.showdetails"),
     url(r'^changebook$',"mylib.views.changebook"),
+    url(r'^test$',"mylib.views.testofmyown"),
 )

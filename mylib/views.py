@@ -5,10 +5,16 @@ from django.http import HttpResponse
 from mylib.models import *
 import datetime,string
 # Create your views here.
+def testofmyown(req):
+	a = "hello"
+	return HttpResponse(a)
 def index(req):
 	if req.POST:
 		post = req.POST
-		price = string.atof(post["price"])
+		try:
+			price = string.atof(post["price"])
+		except:
+			return render_to_response('addbook.html',{"messages":"对不起，该书的价格格式不对"})
 		isbn = post["isbn"]
 		try:
 			author = Author.objects.get(Name = post["author"])
@@ -70,6 +76,10 @@ def showdetails(req ,id):
 def changebook(req):
 	if req.POST:
 		post = req.POST
+		try:
+			price = string.atof(post["price"])
+		except:
+			return render_to_response('modify.html',{"Tips":"对不起，该书的价格格式不对"})
 		isbn = post["isbn"]
 		try:
 			author = Author.objects.get(Name = post["author"])
